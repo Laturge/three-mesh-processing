@@ -1,11 +1,15 @@
 {
-  "name": "three-mesh-processing",
+  "name": "@laturge/three-mesh-processing",
   "version": "1.0.0",
   "description": "three.js mesh processing library",
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p build/ && browserify --debug -s MP index.js -o build/bundle.js",
     "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laturge/three-mesh-processing.git"
   },
   "author": "Laturge",
   "license": "MIT",
