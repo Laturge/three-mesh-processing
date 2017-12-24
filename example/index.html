@@ -1,0 +1,35 @@
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.js"></script>
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<script src="../build/bundle.js"></script>
+<script src="viewer.js"></script>
+<script>
+
+var geometry = MP.Geometry.fromData({
+    attributes:{
+        POSITION: [-1,0,0,  -1,1,0, 1,0,0],
+    },
+    indices: [0,1,2]
+});
+
+
+var sphere = new THREE.CylinderGeometry(0.6, 1.1, 1.3, 80, 90, false, Math.PI);
+console.log('Vertices: '+sphere.vertices.length);
+
+MP.Octree.slice(sphere, 380, (geometry, position, level, id, isFinal)=>{
+    console.log('Vertices: '+geometry.vertices.length, id);
+    
+    if(isFinal){
+        var m = new THREE.Mesh(geometry);
+        m.position.set(...position.toArray());
+        m.chunkId = id;
+        addMesh(m);
+    }
+
+},(info)=>{
+    console.log(info.msg, info.id);
+});
+
+</script>
+</body>
+
